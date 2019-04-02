@@ -2,7 +2,7 @@
 
 int main()
 {
-    int k; //degree of rotation
+    int k=1; //degree of rotation
     int alphabet[26];
     for (int counter=1 ; counter <= 26 ; counter++)
     {
@@ -14,4 +14,8 @@ int main()
     inputLetter=inputLetter-96;
     inputLetterInteger=inputLetter;
     printf("%d\n", alphabet[inputLetterInteger]);
+    
+    int newLetter;
+    newLetter=((inputLetter+k) % 26);
+    printf("%d", newLetter);
 }
