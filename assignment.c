@@ -1,9 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include <string.h>
 
 int main()
 {
+    printf("Welcome, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n");
+    
 FILE *inputtext;
 char inputletters[256];
 char ch;
