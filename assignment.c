@@ -1,30 +1,19 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 int main()
 {
-    int k=1; //degree of rotation
-    int alphabet[26];
-    for (int counter=1 ; counter <= 26 ; counter++)
-    {
-        alphabet[counter] = counter;
-    }
-    char inputLetter;
-    //char inputString[256];
-    //scanf("%s", inputString);
-    int inputLetterInteger;
-    scanf("%c", &inputLetter);
-    inputLetter=inputLetter-96;
-    //inputString[256]=inputString[256]-96;
-    inputLetterInteger=inputLetter;
-    printf("%d\n", alphabet[inputLetterInteger]);
-    char newLetter;
-    int newLetterInteger;
-    //char newInputString[256];
-    //newInputString=((inputString)-96)+k);
-    newLetterInteger=((inputLetter+k) % 26);
-    newLetter=newLetterInteger+96;
-    printf("%c", newLetter);
-    //printf("%s", newInputString);
+FILE *inputtext;
+char inputletters[256];
+char ch;
+int n=1;
+inputtext=fopen("input.txt", "r");
+
+   while((ch = fgetc(inputtext)) != EOF)
+
+
+        printf("%c", ch);
+
+    fclose(inputtext);
 }
 
 //#include <stdio.h>
