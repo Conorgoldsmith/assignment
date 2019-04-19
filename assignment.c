@@ -1,60 +1,79 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+char subCyph(char inputLetter, char location);
+
 int main()
 {
-    printf("Welcome, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n");
+    printf("Welcome, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n\n");
     
 FILE *inputtext;
-char inputletters[256];
 char ch;
-int k=18; //degree of rotation
+static int k=18; //degree of rotation
 int inputletterint;
 char newLetter;
 int newLetterInteger;
 inputtext=fopen("input.txt", "r");
 
 
-   while((ch = fgetc(inputtext)) != EOF)
+   while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         for (int n=1 ; n<2 ; n++)
         {
     inputletterint=ch-96;
     newLetterInteger=((inputletterint+k));
     newLetter=newLetterInteger+96;
-    inputletters[n]=newLetter;
-    if(inputletters[1]<123 || inputletters[1]>96 || inputletters[1]==32){
-        if (inputletters[1]>122){
-            inputletters[1]=inputletters[1]-26;
+    if(newLetter<123 || newLetter>96 || newLetter==32){
+        if (newLetter>122){
+            newLetter=newLetter-26;
         }
-        if (inputletters[1]<97){
-            inputletters[1]=inputletters[1]+26;
+        if (newLetter<97){
+            newLetter=newLetter+26;
         }
-        if (inputletters[1]==76){
-            inputletters[1]=32;
+        if (newLetter==76){
+            newLetter=32;
         }
     }
-    if (inputletters[1]>123 || inputletters[1]<96){
-        inputletters[1]=ch;
+    if (newLetter>123 || newLetter<96){
+        newLetter=ch;
     }
 
-    printf("%c", inputletters[1]);
+    printf("%c", newLetter);
     }
     
     fclose(inputtext);
 }
 
-//#include <stdio.h>
-//int main() 
-//{
-  //  char string[] = "this is a string";
-    //int n;
-    //for(n=0 ; n<15 ; n++)
-    //{
-    //    string[n]=string[n]+1;
-    //}
-    //for(int i=0 ; i< 15 ; i++)
-    //{
-    //    printf("%c", string[i]);
-    //}
 
-//;}
+char subCyph(char inputLetter, char location)
+{
+    FILE *inputtext;
+    inputtext=fopen("input.txt", "r");
+
+    
+    
+       while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
+        for (int n=1 ; n<2 ; n++)
+        {
+    inputletterint=ch-96;
+    newLetterInteger=((inputletterint+k));
+    newLetter=newLetterInteger+96;
+    if(newLetter<123 || newLetter>96 || newLetter==32){
+        if (newLetter>122){
+            newLetter=newLetter-26;
+        }
+        if (newLetter<97){
+            newLetter=newLetter+26;
+        }
+        if (newLetter==76){
+            newLetter=32;
+        }
+    }
+    if (newLetter>123 || newLetter<96){
+        newLetter=ch;
+    }
+
+    printf("%c", newLetter);
+    }
+    
+    fclose(inputtext);
+}
