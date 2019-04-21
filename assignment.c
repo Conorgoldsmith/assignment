@@ -5,8 +5,16 @@ char subCyph(char inputLetter);
 
 int main()
 {
+    int choice;
     printf("Welcome, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n\n");
-    k1=12;
+    scanf("%d", &choice);
+    if (choice==1)
+    {
+        printf("Enter a key");
+        scanf("%d", &k);
+    }
+    
+    
       FILE *inputtext;
     inputtext=fopen("input.txt", "r");
     char ch;
@@ -16,6 +24,7 @@ int main()
     newLetter=subCyph(ch);
     printf("%c", newLetter);
     }
+    printf("\n");
 
 }
 
