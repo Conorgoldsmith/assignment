@@ -53,14 +53,21 @@ int main()
         char ch;
         char keyStr[128];
         printf("Enter key.\n");
-        scanf("%c", &keyStr);
-        scanf("%c", &keyStr);
+        scanf("%s", &keyStr);
+        
+        int i;
+        for(i=0;i<26;i++)
+        {
+            scanf("%s", &keyStr);
+            keyStr[i]=keyStr;
+        }
+        
         while((ch = fgetc(inputtext)) != EOF)
         {
             inputArray[n]=ch;
             n++;            
         }
-        printf("%c", keyStr);
+        printf("%c", keyStr[1]);
     }
 
 }
