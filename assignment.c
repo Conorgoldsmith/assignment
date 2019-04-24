@@ -43,6 +43,25 @@ int main()
         }
         printf("\n");
         }
+    
+    if (choice==3)
+    {
+              FILE *inputtext;
+        inputtext=fopen("input.txt", "r");
+        char inputArray[128];
+        int n=1;
+        char ch;
+        char keyStr[128];
+        printf("Enter key.\n");
+        scanf("%c", &keyStr);
+        scanf("%c", &keyStr);
+        while((ch = fgetc(inputtext)) != EOF)
+        {
+            inputArray[n]=ch;
+            n++;            
+        }
+        printf("%c", keyStr);
+    }
 
 }
 
@@ -68,5 +87,5 @@ char rotCyph(char inputLetter)
 
 char subCyph(char inputLetter)
 {
-    
+    return 0;
 }
