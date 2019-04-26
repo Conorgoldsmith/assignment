@@ -46,28 +46,25 @@ int main()
     
     if (choice==3)
     {
-              FILE *inputtext;
+            FILE *inputtext;
         inputtext=fopen("input.txt", "r");
-        char inputArray[128];
-        int n=1;
         char ch;
-        char keyStr[128];
-        printf("Enter key.\n");
-        scanf("%s", &keyStr);
+        char newLetter;
+        int i=1;
         
-        int i;
-        for(i=0;i<26;i++)
+                while(i<26)
         {
             scanf("%s", &keyStr);
             keyStr[i]=keyStr;
+            i++;
         }
         
-        while((ch = fgetc(inputtext)) != EOF)
+        while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
-            inputArray[n]=ch;
-            n++;            
+            newLetter=subCyph(ch);
+            printf("%c\n", newLetter);
         }
-        printf("%c", keyStr[1]);
+
     }
 
 }
@@ -94,5 +91,18 @@ char rotCyph(char inputLetter)
 
 char subCyph(char inputLetter)
 {
-    return 0;
+        char alphabet[128]={65,66,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
+        char ch;
+        char keyStr[128];
+        int x;
+        char newLetter;
+
+        for(x=0; x<26;x++)
+        {
+            if(inputLetter==alphabet[x])
+            {
+                newLetter=keyStr[x];
+            }
+        }
+    return newLetter;
 }
