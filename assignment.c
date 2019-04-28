@@ -1,8 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 int k1=1;
 char rotCyph(char inputLetter);
 char subCyph(char inputLetter);
+char subCyphDec(char inputLetter);
+char subKey[128];
 
 int main()
 {
@@ -50,21 +53,58 @@ int main()
         inputtext=fopen("input.txt", "r");
         char ch;
         char newLetter;
-        int i=1;
-        
-                while(i<26)
+        char keyletter;
+        int n=1;
+        char newLetters;
+            FILE *subkey;
+        subkey=fopen("substitutionkey.txt", "r");
+
+        while((keyletter = fgetc(subkey)) != EOF) // channge ch to another name 
         {
-            scanf("%s", &keyStr);
-            keyStr[i]=keyStr;
-            i++;
+            subKey[n]=keyletter;
+            n++;
         }
-        
         while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
-            newLetter=subCyph(ch);
-            printf("%c\n", newLetter);
-        }
+            newLetter=ch;
+            if(ch<123 && ch>63)
+            {
+                newLetter=subCyph(ch);
+            }    
 
+            printf("%c", newLetter);
+        }
+    printf("\n");
+    }
+    
+    if (choice==4)
+    {
+            FILE *inputtext;
+        inputtext=fopen("input.txt", "r");
+        char ch;
+        char newLetter;
+        char keyletter;
+        int n=1;
+        char newLetters;
+            FILE *subkey;
+        subkey=fopen("substitutionkey.txt", "r");
+
+        while((keyletter = fgetc(subkey)) != EOF) // channge ch to another name 
+        {
+            subKey[n]=keyletter;
+            n++;
+        }
+        while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
+        {
+            newLetter=ch;
+            if(ch<123 && ch>63)
+            {
+                newLetter=subCyphDec(ch);
+            }    
+
+            printf("%c", newLetter);
+        }
+    printf("\n");
     }
 
 }
@@ -91,18 +131,34 @@ char rotCyph(char inputLetter)
 
 char subCyph(char inputLetter)
 {
-        char alphabet[128]={65,66,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
-        char ch;
-        char keyStr[128];
+        char alphabet[27]={64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
         int x;
         char newLetter;
+        
 
-        for(x=0; x<26;x++)
+        for(x=1; x<27;x++)
         {
             if(inputLetter==alphabet[x])
             {
-                newLetter=keyStr[x];
+                newLetter=subKey[x];
             }
         }
-    return newLetter;
+    return newLetter;//change to newletter
+}
+
+char subCyphDec(char inputLetter)
+{
+        char alphabet[27]={64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
+        int x;
+        char newLetter;
+        
+
+        for(x=1; x<27;x++)
+        {
+            if(inputLetter==subKey[x])
+            {
+                newLetter=alphabet[x];
+            }
+        }
+    return newLetter;//change to newletter
 }
