@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int key1;
 int k1=1;
 int k2;
 char rotCyph(char inputLetter);
+char rotCyphUnk(char inputLetter);
 char subCyph(char inputLetter);
 char subCyphDec(char inputLetter);
 char subKey[128];
@@ -113,11 +115,112 @@ int main()
         char ch;
         int n=1;
         char newLetter;
+        int i;
+        int count=0;
+        float max=-1e30;
+        int maxindex;
+        char inputArray[128];
+        char newLetters;
+        int cntA, cntB, cntC, cntD, cntE, cntF, cntG, cntH, cntI, cntJ, cntK, cntL, cntM, cntN, cntO, cntP, cntQ, cntR, cntS, cntT, cntU, cntV, cntW, cntX, cntY, cntZ;
         while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
-            newLetter=rotCyph(ch);
-            printf("%c", newLetter);
+            inputArray[n]=ch;
+            ++n;
         }
+        for(i=1;i<128;i++)
+        {
+            switch(inputArray[i])
+            {
+                case 65:cntA++;
+                    break;
+                case 66:cntB++;
+                    break;
+                case 67:cntC++;
+                    break;
+                case 68:cntD++;
+                    break;
+                case 69:cntE++;
+                    break;
+                case 70:cntF++;
+                    break;
+                case 71:cntG++;
+                    break;
+                case 72:cntH++;
+                    break;
+                case 73:cntI++;
+                    break;
+                case 74:cntJ++;
+                    break;
+                case 75:cntK++;
+                    break;
+                case 76:cntL++;
+                    break;
+                case 77:cntM++;
+                    break;
+                case 78:cntN++;
+                    break;
+                case 79:cntO++;
+                    break;
+                case 80:cntP++;
+                    break;
+                case 81:cntQ++;
+                    break;
+                case 82:cntR++;
+                    break;
+                case 83:cntS++;
+                    break;
+                case 84:cntT++;
+                    break;
+                case 85:cntU++;
+                    break;
+                case 86:cntV++;
+                    break;
+                case 87:cntW++;
+                    break;
+                case 88:cntX++;
+                    break;
+                case 89:cntY++;
+                    break;
+                case 90:cntZ++;
+                    break;
+                default: 
+                    break;
+            }
+        }
+    int data[26];
+    data[0]=cntA; data[1]=cntB; data[2]=cntC; data[3]=cntD; data[4]=cntE; data[5]=cntF; data[6]=cntG;
+    data[7]=cntH; data[8]=cntI; data[9]=cntJ; data[10]=cntK; data[11]=cntL; data[12]=cntM; data[13]=cntN;
+    data[14]=cntO; data[15]=cntP; data[16]=cntQ; data[17]=cntR; data[18]=cntS; data[19]=cntT; data[20]=cntU;
+    data[21]=cntV; data[22]=cntW; data[23]=cntX; data[24]=cntY; data[25]=cntZ;
+    while(count<26)
+    {
+        if(data[count]>max)
+        {
+            max=data[count];
+            maxindex=count;
+        }
+        count++;
+    }
+    if(maxindex-4>0)
+    {
+        key1=maxindex+65-69;
+    }
+    else if(maxindex-4<=0)
+    {
+        key1=maxindex+65-69+26;
+    }
+    else if(maxindex==69)
+    {
+        key1=maxindex+65;
+    }
+    printf("%d", key1);
+    while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
+    {
+        newLetters=rotCyphUnk(ch);
+        printf("%c", newLetters);
+    }
+    
+    printf("\n");
     }
 
 }
@@ -141,6 +244,26 @@ char rotCyph(char inputLetter)
     }
     return newLetters;
 }
+
+char rotCyphUnk(char inputLetter)
+{
+    char newLetters;
+    newLetters=inputLetter+key1;
+    if(inputLetter<91 && inputLetter>64){
+        if (newLetters>90){
+            newLetters=newLetters-26;//could be 26
+        }
+        if (newLetters<63){
+            newLetters=newLetters+26;//could be 26
+        }
+    }
+    else
+    {
+        newLetters=inputLetter;
+    }
+    return newLetters;
+}
+
 
 char subCyph(char inputLetter)
 {
