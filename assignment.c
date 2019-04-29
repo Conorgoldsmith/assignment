@@ -1,11 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int key2;
 int key1;
 int k1=1;
 int k2;
 char rotCyph(char inputLetter);
 char rotCyphUnk(char inputLetter);
+char rotCyphUnk1(char inputLetter);
 char subCyph(char inputLetter);
 char subCyphDec(char inputLetter);
 char subKey[128];
@@ -111,16 +113,24 @@ int main()
     if(choice==5)
     {
         FILE *inputtext;
+        FILE *inputtext1;
+        FILE *inputtext2;
         inputtext=fopen("input.txt", "r");
+        inputtext1=fopen("input.txt", "r");
+        inputtext2=fopen("input.txt", "r");
         char ch;
+        char ch1;
+        char ch2;
         int n=1;
         char newLetter;
         int i;
+        int n1, n2;
         int count=0;
         float max=-1e30;
         int maxindex;
-        char inputArray[128];
+        char inputArray[10000];
         char newLetters;
+        char newL, newL1;
         int cntA, cntB, cntC, cntD, cntE, cntF, cntG, cntH, cntI, cntJ, cntK, cntL, cntM, cntN, cntO, cntP, cntQ, cntR, cntS, cntT, cntU, cntV, cntW, cntX, cntY, cntZ;
         while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
@@ -201,28 +211,49 @@ int main()
         }
         count++;
     }
-    if(maxindex-4>0)
+    
+        if(maxindex-4>0)
+        {
+            key1=maxindex+65-69;
+        }
+        else if(maxindex-4<=0)
+        {
+            key1=maxindex+65-69+26;
+        }
+        else if(maxindex==69)
+        {   
+            key1=maxindex+65;
+        }
+    
+        if(maxindex-15>0)
+        {
+            key2=maxindex+65-84;
+        }
+        else if(maxindex-15<=0)
+        {
+            key2=maxindex+65-84+26;
+        }
+        else if(maxindex==84)
     {
-        key1=maxindex+65-69;
+        key2=maxindex+65;
     }
-    else if(maxindex-4<=0)
-    {
-        key1=maxindex+65-69+26;
-    }
-    else if(maxindex==69)
-    {
-        key1=maxindex+65;
-    }
-    printf("%d", key1);
-    while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
-    {
-        newLetters=rotCyphUnk(ch);
-        printf("%c", newLetters);
-    }
+    printf("If E is the most common letter the message is:\n");
+    while((ch1 = fgetc(inputtext1)) != EOF) // channge ch to another name 
+        {
+            newL=rotCyphUnk(ch1);
+            printf("%c", newL);
+        }
     
     printf("\n");
+    printf("If T is the most common letter the message is:\n");
+        while((ch2 = fgetc(inputtext2)) != EOF) // channge ch to another name 
+        {
+            newL1=rotCyphUnk1(ch2);
+            printf("%c", newL1);
+        }
+    printf("\n");
     }
-
+    return 0;
 }
 
 
@@ -264,6 +295,24 @@ char rotCyphUnk(char inputLetter)
     return newLetters;
 }
 
+char rotCyphUnk1(char inputLetter)
+{
+    char newLetters;
+    newLetters=(inputLetter+key2);
+    if(inputLetter<91 && inputLetter>64){
+        if (newLetters>90){
+            newLetters=newLetters-26;//could be 26
+        }
+        if (newLetters<63){
+            newLetters=newLetters+26;//could be 26
+        }
+    }
+    else
+    {
+        newLetters=inputLetter;
+    }
+    return newLetters;
+}
 
 char subCyph(char inputLetter)
 {
