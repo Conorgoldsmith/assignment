@@ -108,28 +108,16 @@ int main()
     
     if(choice==5)
     {
-              FILE *inputtext;
+        FILE *inputtext;
         inputtext=fopen("input.txt", "r");
         char ch;
-        int letterCount[128];
-        int i;
-        for(i=1;i<27;i++)
-        {
-            letterCount[i]=1;
-        }
         int n=1;
+        char newLetter;
         while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
-                if(ch-64==n)
-                {
-                    letterCount[n]++;
-                }
-                if(ch-64!=n)
-                {
-                    n++;
-                }
+            newLetter=rotCyph(ch);
+            printf("%c", newLetter);
         }
-        printf("%d", letterCount[5]);
     }
 
 }
