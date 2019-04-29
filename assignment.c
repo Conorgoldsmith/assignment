@@ -1,6 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/*
+This program allows a user to perform 5 functions, encrypting and decrypting rotation cyphers
+with a key, and decrypt without a key, and encrypt and decrypt using a substitution cypher.
+By inputting text into a file all of these functions can be performed.
+This program can be useful to make cryptic messages to add a layer of security to the message.
+The user is iformed throughout the program using an interactive interface. 
+*/
 //using the header for function prototypes and global variables
 
 int key2; //initialising key2 for most common letter T as a global variable 
@@ -22,7 +29,7 @@ int main()
 {
     int choice; // initialises a variable to take input from the user for interface selection
     //prints the user interface
-    printf("Welcome, type message to be encrypted/decrypted into input.txt, then, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n5.Rotation Cypher Decryption Without Key\n\n");
+    printf("Welcome, type message to be encrypted/decrypted into input.txt, then, choose either:\n(If using substitution, enter key into substitutionkey.txt)\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n5.Rotation Cypher Decryption Without Key\n\n");
     scanf("%d", &choice);//scans users input and stores in choice
     if (choice==1) 
     {
@@ -34,6 +41,7 @@ int main()
         inputtext=fopen("input.txt", "r");//initialises, opens and reads the file input.txt
         char ch;
         char newLetter;
+        printf("The encrypted message is:\n");
         while((ch = fgetc(inputtext)) != EOF) //runs through the file input.txt character by character
         {
             newLetter=rotCyph(ch);
@@ -42,35 +50,36 @@ int main()
         printf("\n");
         }
         
-    if (choice==2)
+    if (choice==2)//if the user choses 2 these lines of code execute
     {
         printf("Enter assigned key\n");
-        scanf("%d", &k1);
-        k1=-k1;
+        scanf("%d", &k1);//sacns the input from the user for the key
+        k1=-k1;//changes key to a negative value
         
               FILE *inputtext;
-        inputtext=fopen("input.txt", "r");
-        char ch;
+        inputtext=fopen("input.txt", "r");//reads the file input.txt
+        char ch;//ch is the letter in the file that is being read
         char newLetter;
+        printf("The decrypted message is:\n");
         while((ch = fgetc(inputtext)) != EOF) //runs through the file input.txt character by character
         {
-            newLetter=rotCyph(ch);
-            printf("%c", newLetter);
+            newLetter=rotCyph(ch);//passes ch through function and assigns newletter to its value
+            printf("%c", newLetter);//prints newletter
         }
         printf("\n");
         }
     
-    if (choice==3)
+    if (choice==3)//if the uses choses 3 these lines of code execute
     {
             FILE *inputtext;
-        inputtext=fopen("input.txt", "r");
-        char ch;
+        inputtext=fopen("input.txt", "r");//reads the input.txt file
+        char ch;//ch is the letter in the file that is being read
         char newLetter;
         char keyletter;
         int n=1;
             FILE *subkey;
-        subkey=fopen("substitutionkey.txt", "r");
-
+        subkey=fopen("substitutionkey.txt", "r");//reads substitutionkey.txt
+        printf("The encrypted message is:\n");
         while((keyletter = fgetc(subkey)) != EOF) //runs through the file input.txt character by character 
         {
             subKey[n]=keyletter;
@@ -81,7 +90,7 @@ int main()
             newLetter=ch;
             if(ch<123 && ch>63)
             {
-                newLetter=subCyph(ch);
+                newLetter=subCyph(ch);//assigns the value of newletter to the value of ch after going throigh subcyph function
             }    
 
             printf("%c", newLetter);
@@ -89,20 +98,20 @@ int main()
     printf("\n");
     }
     
-    if (choice==4)
+    if (choice==4)//if the user choses 4 these lines of code execute 
     {
             FILE *inputtext;
-        inputtext=fopen("input.txt", "r");
-        char ch;
+        inputtext=fopen("input.txt", "r");//reads the file input.txt and assigns to inputtext
+        char ch; //ch is the letter in the file that is being read
         char newLetter;
         char keyletter;
         int n=1;
-            FILE *subkey;
-        subkey=fopen("substitutionkey.txt", "r");
-
+            FILE *subkey;//initialises subkey
+        subkey=fopen("substitutionkey.txt", "r"); //reads the file of substitutionkey.txt and assigns it to subkey
+        printf("The decrypted message is:\n");
         while((keyletter = fgetc(subkey)) != EOF) //runs through the file input.txt character by character
         {
-            subKey[n]=keyletter;
+            subKey[n]=keyletter;//takes the input and assigns each letter to an array
             n++;
         }
         while((ch = fgetc(inputtext)) != EOF) //runs through the file input.txt character by character 
@@ -110,34 +119,34 @@ int main()
             newLetter=ch;
             if(ch<123 && ch>63)
             {
-                newLetter=subCyphDec(ch);
+                newLetter=subCyphDec(ch);//assigns the value of the new letter
             }    
 
-            printf("%c", newLetter);
+            printf("%c", newLetter);//prints the new letter
         }
     printf("\n");
     }
     
     if(choice==5)
     {
+        //Following lines initialise file pointers and reads the file input.txt assigning its value
         FILE *inputtext;
         FILE *inputtext1;
         FILE *inputtext2;
         inputtext=fopen("input.txt", "r");
         inputtext1=fopen("input.txt", "r");
         inputtext2=fopen("input.txt", "r");
+        
         char ch;
-        char ch1;
+        char ch1;// ch is the value of the character in the file 
         char ch2;
-        int n=1;
-        char newLetter;
-        int i;
-        int n1, n2;
-        int count=0;
+        int n=1;//counter
+        int i;//counter
+        int count=0;//counter
         float max=-1e30;
-        int maxindex;
-        char inputArray[10000];
-        char newL, newL1;
+        int maxindex;//used for finding largest value
+        char inputArray[10000];//array for input
+        char newL, newL1;//the final letter to be printed
         int cntA, cntB, cntC, cntD, cntE, cntF, cntG, cntH, cntI, cntJ, cntK, cntL, cntM, cntN, cntO, cntP, cntQ, cntR, cntS, cntT, cntU, cntV, cntW, cntX, cntY, cntZ;
         while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
         {
@@ -264,17 +273,17 @@ int main()
     // if the choice is not one of the options these lines of code give an error message
     if(choice!=1 || choice!=2 || choice!=3 || choice!=4 || choice!=5)
     {
-        printf("Restart the program and enter a number between 1 and 5");
+        printf("Restart the program and enter a number between 1 and 5\n");
     }
     return 0;
 }
 
 //these are where all of the functions are defined, under main
 
-char rotCyph(char inputLetter)
+char rotCyph(char inputLetter) //function definition for rotation encryption and decryption
 {
     char newLetters;
-    newLetters=inputLetter+k1;
+    newLetters=inputLetter+k1;//applies the key to the old letter
     if(inputLetter<91 && inputLetter>64){
         if (newLetters>90){
             newLetters=newLetters-26;//could be 26
@@ -287,13 +296,32 @@ char rotCyph(char inputLetter)
     {
         newLetters=inputLetter;
     }
-    return newLetters;
+    return newLetters;//returns the value of new letter
 }
 
-char rotCyphUnk(char inputLetter)
+char rotCyphUnk(char inputLetter)//function definition for rotation encryption without a key with E being the most common letter
 {
     char newLetters;
-    newLetters=inputLetter+key1;
+    newLetters=inputLetter+key1;//applies the key to the old letter
+    if(inputLetter<91 && inputLetter>64){
+        if (newLetters>90){
+            newLetters=newLetters-26;//could be 26
+        }
+        if (newLetters<63){
+            newLetters=newLetters+26;//could be 26
+        }
+    }
+    else
+    {
+        newLetters=inputLetter;//assigns the value of the new letter
+    }
+    return newLetters;//returns the values of the new letter
+}
+
+char rotCyphUnk1(char inputLetter)//function definition for rotation encryption without a key with T being the most common letter
+{
+    char newLetters;
+    newLetters=(inputLetter+key2);//applies the key to the old letter
     if(inputLetter<91 && inputLetter>64){
         if (newLetters>90){
             newLetters=newLetters-26;//could be 26
@@ -306,58 +334,39 @@ char rotCyphUnk(char inputLetter)
     {
         newLetters=inputLetter;
     }
-    return newLetters;
+    return newLetters;//returns the value of newLetter
 }
 
-char rotCyphUnk1(char inputLetter)
-{
-    char newLetters;
-    newLetters=(inputLetter+key2);
-    if(inputLetter<91 && inputLetter>64){
-        if (newLetters>90){
-            newLetters=newLetters-26;//could be 26
-        }
-        if (newLetters<63){
-            newLetters=newLetters+26;//could be 26
-        }
-    }
-    else
-    {
-        newLetters=inputLetter;
-    }
-    return newLetters;
-}
-
-char subCyph(char inputLetter)
+char subCyph(char inputLetter)//the function for the encryption of substitution cypher
 {
         char alphabet[27]={64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
-        int x;
-        char newLetter;
+        int x;//used as a counter
+        char newLetter;//used as a reurn value 
         
 
         for(x=1; x<27;x++)
         {
             if(inputLetter==alphabet[x])
             {
-                newLetter=subKey[x];
+                newLetter=subKey[x];//assigns newLetter the value of subkey at point x
             }
         }
     return newLetter;//change to newletter
 }
 
-char subCyphDec(char inputLetter)
+char subCyphDec(char inputLetter)//the function for the decryption of substitution cypher
 {
         char alphabet[27]={64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90};
-        int x;
-        char newLetter;
+        int x;//used as a counter
+        char newLetter;//uses as a return value
         
 
         for(x=1; x<27;x++)
         {
             if(inputLetter==subKey[x])
             {
-                newLetter=alphabet[x];
+                newLetter=alphabet[x];//assigns newLetter the value of subkey at point x
             }
         }
-    return newLetter;//change to newletter
+    return newLetter;//returns the value of the new letter
 }
