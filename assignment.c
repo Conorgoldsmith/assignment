@@ -2,6 +2,7 @@
 #include<stdlib.h>
 
 int k1=1;
+int k2;
 char rotCyph(char inputLetter);
 char subCyph(char inputLetter);
 char subCyphDec(char inputLetter);
@@ -10,7 +11,7 @@ char subKey[128];
 int main()
 {
     int choice;
-    printf("Welcome, type message to be encrypted/decrypted into input.txt, then, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n\n");
+    printf("Welcome, type message to be encrypted/decrypted into input.txt, then, choose either:\n1.Rotation Cypher Encryption\n2.Rotation Cypher Decryption\n3.Substitution Cypher Encryption\n4.Substitution Cypher Decryption\n5.Rotation Cypher Decryption Without Key\n\n");
     scanf("%d", &choice);
     if (choice==1)
     {
@@ -55,7 +56,6 @@ int main()
         char newLetter;
         char keyletter;
         int n=1;
-        char newLetters;
             FILE *subkey;
         subkey=fopen("substitutionkey.txt", "r");
 
@@ -85,7 +85,6 @@ int main()
         char newLetter;
         char keyletter;
         int n=1;
-        char newLetters;
             FILE *subkey;
         subkey=fopen("substitutionkey.txt", "r");
 
@@ -105,6 +104,32 @@ int main()
             printf("%c", newLetter);
         }
     printf("\n");
+    }
+    
+    if(choice==5)
+    {
+              FILE *inputtext;
+        inputtext=fopen("input.txt", "r");
+        char ch;
+        int letterCount[128];
+        int i;
+        for(i=1;i<27;i++)
+        {
+            letterCount[i]=1;
+        }
+        int n=1;
+        while((ch = fgetc(inputtext)) != EOF) // channge ch to another name 
+        {
+                if(ch-64==n)
+                {
+                    letterCount[n]++;
+                }
+                if(ch-64!=n)
+                {
+                    n++;
+                }
+        }
+        printf("%d", letterCount[5]);
     }
 
 }
